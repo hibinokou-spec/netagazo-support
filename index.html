@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ネタ画像メーカー - NetaGazo | サポート</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lime: #a8e06c;
+            --yellow: #e8d44d;
+            --dark: #1a1a2e;
+            --darker: #12121f;
+            --card: rgba(255,255,255,0.05);
+            --border: rgba(255,255,255,0.08);
+            --text: #c8cdd8;
+            --text-light: #8892a6;
+            --accent: #c8e64a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', 'Hiragino Sans', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(160deg, var(--dark) 0%, #1e1a3a 50%, var(--dark) 100%);
+            padding: 60px 20px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(168,224,108,0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(232,212,77,0.04) 0%, transparent 50%);
+            animation: drift 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-30px, 20px); }
+        }
+
+        .hero-content { position: relative; z-index: 1; }
+
+        .app-icon {
+            width: 100px; height: 100px;
+            border-radius: 22px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, var(--yellow), var(--lime));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 42px; font-weight: 900;
+            color: #333;
+            box-shadow: 0 8px 32px rgba(168,224,108,0.2);
+            letter-spacing: -2px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        /* Main */
+        main {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 32px 20px 60px;
+        }
+
+        section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 24px;
+            margin-bottom: 16px;
+            transition: border-color 0.3s;
+        }
+
+        section:hover {
+            border-color: rgba(168,224,108,0.15);
+        }
+
+        h2 {
+            font-size: 18px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h2 .icon {
+            font-size: 20px;
+        }
+
+        h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 16px 0 6px;
+        }
+
+        p { margin-bottom: 10px; font-size: 14px; }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        a:hover { border-bottom-color: var(--accent); }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 6px 0;
+            font-size: 14px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        ul li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 8px;
+            top: 10px;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, var(--yellow), var(--lime));
+            color: #1a1a2e;
+            font-weight: 700;
+            padding: 10px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-top: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(168,224,108,0.25);
+            border-bottom-color: transparent;
+        }
+
+        .format-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .format-tag {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .format-tag .emoji { font-size: 16px; }
+
+        .badge-free {
+            font-size: 9px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        .badge-pro {
+            font-size: 9px;
+            background: rgba(255,255,255,0.1);
+            color: var(--text-light);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: var(--text-light);
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 40px 16px 36px; }
+            h1 { font-size: 24px; }
+            main { padding: 24px 16px 48px; }
+            section { padding: 22px 18px; }
+            .format-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <div class="hero-content">
+        <div class="app-icon">ネタ</div>
+        <h1>ネタ画像メーカー</h1>
+        <p class="subtitle">NetaGazo - 6つのフォーマットでネタ画像をかんたん作成</p>
+    </div>
+</header>
+
+<main>
+
+    <section>
+        <h2><span class="icon">🎨</span> アプリについて</h2>
+        <p>ネタ画像メーカーは、日本のネット文化に特化した6種類のテンプレートで、おもしろ画像をかんたんに作れるiOSアプリです。</p>
+
+        <div class="format-grid">
+            <div class="format-tag"><span class="emoji">😂</span> 大喜利 <span class="badge-free">FREE</span></div>
+            <div class="format-tag"><span class="emoji">🔴</span> ニュース速報 <span class="badge-free">FREE</span></div>
+            <div class="format-tag"><span class="emoji">👴</span> おじさん構文 <span class="badge-free">FREE</span></div>
+            <div class="format-tag"><span class="emoji">📰</span> 新聞一面 <span class="badge-pro">PRO</span></div>
+            <div class="format-tag"><span class="emoji">🏆</span> 賞状 <span class="badge-pro">PRO</span></div>
+            <div class="format-tag"><span class="emoji">💥</span> 漫画コマ <span class="badge-pro">PRO</span></div>
+        </div>
+    </section>
+
+    <section>
+        <h2><span class="icon">📮</span> お問い合わせ</h2>
+        <p>アプリに関するご質問、不具合のご報告、ご要望などがございましたら、以下のメールアドレスまでお気軽にご連絡ください。</p>
+        <a href="mailto:contact@kouworks.jp" class="contact-link">
+            ✉ contact@kouworks.jp
+        </a>
+    </section>
+
+    <section>
+        <h2><span class="icon">🔒</span> プライバシーポリシー</h2>
+        <p>ネタ画像メーカーは、ユーザーのプライバシーを尊重し、以下のポリシーに従って運営しています。</p>
+
+        <h3>収集する情報</h3>
+        <p>本アプリはユーザーの個人情報を収集しません。作成した画像やテキストはすべてお使いの端末内でのみ処理され、外部サーバーに送信されることはありません。</p>
+
+        <h3>写真へのアクセス</h3>
+        <p>大喜利・漫画コマフォーマットで写真を使用する際に、フォトライブラリへのアクセスを求める場合があります。選択された写真は端末内でのみ使用され、外部に送信されることはありません。</p>
+
+        <h3>課金情報</h3>
+        <p>Pro版の購入はAppleのApp内課金を通じて処理されます。支払い情報はAppleが管理しており、開発者がアクセスすることはありません。</p>
+
+        <h3>分析・トラッキング</h3>
+        <p>本アプリは第三者の分析ツールやトラッキングSDKを使用していません。</p>
+
+        <h3>お子様のプライバシー</h3>
+        <p>本アプリは13歳未満のお子様から意図的に個人情報を収集することはありません。</p>
+
+        <h3>ポリシーの変更</h3>
+        <p>本プライバシーポリシーは予告なく変更される場合があります。変更があった場合は、本ページにて更新いたします。</p>
+    </section>
+
+    <section>
+        <h2><span class="icon">📋</span> 利用規約</h2>
+        <p>本アプリのご利用にあたり、以下の事項にご同意いただいたものとみなします。</p>
+
+        <ul>
+            <li>本アプリは架空のネタ画像を作成するエンターテインメントツールです。</li>
+            <li>実在するメッセージサービス、ニュース番組、新聞社等とは一切関係ありません。</li>
+            <li>作成した画像を使用した、他者へのなりすまし、詐欺、誹謗中傷、虚偽の証拠としての使用、その他違法行為を禁止します。</li>
+            <li>禁止事項に違反して生じた損害について、開発者は一切の責任を負いません。</li>
+            <li>作成した画像の使用はすべて自己責任で行ってください。</li>
+        </ul>
+    </section>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 kouworks. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
